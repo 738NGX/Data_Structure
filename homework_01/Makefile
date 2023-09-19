@@ -11,14 +11,15 @@ all: $(BuildDir) | $(Target)
 
 $(Target): $(Object)
 	@$(CC) -o $(BuildDir)/$(Target) $(Object)
-	@echo run $(BuildDir)\$(Target)
+	@cmd /C echo run $(BuildDir)\\$(Target)
 
 $(BuildDir)/%.o: %.cpp
 	@$(CC) $(CCFLAGS) -c $< -o $@
 
 clean:
-	@rm -rf $(BuildDir)
-	@echo clean up build
+	@cmd /C del /Q /F $(BuildDir)
+	@cmd /C rmdir /Q /S $(BuildDir)
+	@cmd /C echo clean up build
 
 $(BuildDir):
-	@mkdir $@
+	@cmd /C mkdir $(BuildDir)
