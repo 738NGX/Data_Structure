@@ -35,6 +35,7 @@ namespace Sufe
         void Sort()
         {
             Range r[_SIZE]; int p=0;
+            
             // r[]模拟堆栈,p为数量,r[p++]为push,r[--p]为pop且取得元素
             r[p++]=Range(0,_SIZE-1);
 
