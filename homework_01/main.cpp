@@ -28,8 +28,8 @@ int main()
     cout << endl;
 
     // Call Sort and operator<<() overloading
-    //arr_7.Sort();
-    //cout << "sorted elements of arr_7 are " << arr_7 << endl;
+    arr_7.Sort();
+    cout << "sorted elements of arr_7 are " << arr_7 << endl;
 
     return 0;
 }

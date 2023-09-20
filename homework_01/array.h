@@ -34,7 +34,29 @@ namespace Sufe
         // TODO: 2) 实现排序功能
         void Sort()
         {
-            
+            Range r[_SIZE]; int p=0;
+            r[p++]=Range(0,_SIZE-1);
+
+            while(p)
+            {
+                Range range=r[--p];
+                if(range.start>=range.end) continue;
+                _TYPE mid=m_data[range.end];
+                int left=range.start,right=range.end-1;
+
+                while(left<right)
+                {
+                    while(m_data[left]<mid && left<right) left++;
+                    while(m_data[right]>=mid && left<right) right--;
+                    std::swap(m_data[left],m_data[right]);
+                }
+                if(m_data[left]>=m_data[range.end])
+                    std::swap(m_data[left],m_data[range.end]);
+                else left++;
+
+                r[p++]=Range(range.start,left-1);
+                r[p++]=Range(left+1,range.end);
+            }
         }
 
         // TODO: 3) 实现begin()和end()
@@ -62,5 +84,11 @@ namespace Sufe
 
     private:
         _TYPE m_data[_SIZE];
+        
+        struct Range
+        {
+            int start,end;
+            Range(int s=0,int e=0){start=s,end=e;}
+        };
     };
 }
