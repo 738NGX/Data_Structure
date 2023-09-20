@@ -35,19 +35,21 @@ namespace Sufe
         void Sort()
         {
             Range r[_SIZE]; int p=0;
+            // r[]模拟堆栈,p为数量,r[p++]为push,r[--p]为pop且取得元素
             r[p++]=Range(0,_SIZE-1);
 
+            // 当所有排序完成后,在循环体检验p时恰好p=0,不再进入循环
             while(p)
             {
                 Range range=r[--p];
                 if(range.start>=range.end) continue;
-                _TYPE mid=m_data[range.end];
+                _TYPE pivot=m_data[range.end];  // 基准数统一使用末尾数
                 int left=range.start,right=range.end-1;
 
                 while(left<right)
                 {
-                    while(m_data[left]<mid && left<right) left++;
-                    while(m_data[right]>=mid && left<right) right--;
+                    while(m_data[left]<pivot && left<right) left++;
+                    while(m_data[right]>=pivot && left<right) right--;
                     std::swap(m_data[left],m_data[right]);
                 }
                 if(m_data[left]>=m_data[range.end])
@@ -85,6 +87,7 @@ namespace Sufe
     private:
         _TYPE m_data[_SIZE];
         
+        // 作为Array类的私有成员以便辅助实现快速排序的结构体,记录一个数据范围的开始与结束
         struct Range
         {
             int start,end;
