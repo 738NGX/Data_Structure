@@ -1,0 +1,9 @@
+{
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "d:\\Develop\\C_pp\\Data_Structure\\homework_01\\build",
+            "binaryPath": "d:\\Develop\\C_pp\\Data_Structure\\homework_01\\build\\runme",
+            "binaryArgs": []
+        }
+    ]
+}

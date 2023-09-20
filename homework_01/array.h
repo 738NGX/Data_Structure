@@ -26,27 +26,38 @@ namespace Sufe
         Array(std::initializer_list<_TYPE> list):m_data{0}
         {
             assert(list.size()<=_SIZE);
-            copy(list.begin(),list.end(),m_data);
+            std::copy(list.begin(),list.end(),m_data);
         }
 
         int Size() const { return _SIZE; }
 
         // TODO: 2) 实现排序功能
-        void Sort();
+        void Sort()
+        {
+            
+        }
 
         // TODO: 3) 实现begin()和end()
-        Iterator begin();
-        Iterator end();
+        Iterator begin(){return Iterator(m_data);}
+        Iterator end(){return Iterator(m_data+_SIZE);}
 
         // TODO: 4) 实现At()和[]运算符重载
-        _TYPE &At(int idx);
-        _TYPE &operator[](int idx);
-        const _TYPE &operator[](int index) const;
-
+        _TYPE &At(int idx)
+        {
+            assert(idx>=0 && idx<_SIZE);
+            return m_data[idx];
+        }
+        _TYPE &operator[](int idx){return m_data[idx];}
+        const _TYPE &operator[](int index) const{return m_data[index];}
+        
+        // TODO: 5) 实现<<运算符重载
         friend std::ostream &operator<<(std::ostream &out, const Array &arr)
         {
-        // TODO: 5) 实现<<运算符重载
-        return out;
+            for(size_t i=0;i<_SIZE;i++)
+            {
+                out<<arr[i]<<" ";
+            }
+            return out;
         }
 
     private:
