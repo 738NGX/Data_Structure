@@ -1,6 +1,6 @@
 # Homework 01-实现Sufe::Array
 
-
+仿照`std::array`,实现静态数组类`Sufe::Array`.
 
 ## 📜Demands
 
