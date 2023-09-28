@@ -3,15 +3,15 @@
 
 class AutoTimer
 {
-public:
-  AutoTimer();
-  ~AutoTimer();
+    public:
+    AutoTimer();
+    ~AutoTimer();
 
-  double GetElapsedTimeInSeconds() const;
-  long GetElapsedTimeInMilliSeconds() const;
+    double GetElapsedTimeInSeconds() const;
+    long GetElapsedTimeInMilliSeconds() const;
 
-  void Reset();
+    void Reset();
 
-private:
-  clock_t m_startTime;
+    private:
+    clock_t m_startTime;
 };
