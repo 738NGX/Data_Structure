@@ -9,8 +9,8 @@ namespace Sufe
     {
         if (sz > 0)
         {
-        m_size = sz;
-        m_capacity = std::max(m_size, 16);
+            m_size = sz;
+            m_capacity = std::max(m_size, 16);
         }
         m_data = new int[m_capacity]{0};
     }
@@ -27,22 +27,66 @@ namespace Sufe
         : m_data(nullptr), m_size(0), m_capacity(0)
     {
         // TODO: 按课件实现复制构造函数
+        m_size=other.Size();
+        m_capacity=other.Capacity();
+        m_data=new int [m_capacity]{0};
+        for(int i=0;i<m_size;i++)
+        {
+            m_data[i]=other[i];
+        }
     }
 
     IntVector &IntVector::operator=(const IntVector &rhs)
     {
         // TODO: 按课件实现赋值运算符重载
+        m_size=rhs.Size();
+        m_capacity=rhs.Capacity();
+        for(int i=0;i<m_size;i++)
+        {
+            m_data[i]=rhs[i];
+        }
         return *this;
     }
 
     void IntVector::Insert(int idx, int val)
     {
         // TODO: 按算法思路实现Insert
+        m_size++;
+
+        // 重新分配内存空间
+        if(m_size==m_capacity)
+        {
+            m_capacity*=2;
+            int* new_data=new int [m_capacity];
+            std::copy(m_data,m_data+m_size-1,new_data);
+            delete [] m_data;
+            m_data=new_data;
+        }
+
+        //for(int i=m_size-1;i>idx;i--)
+        //{
+        //    m_data[i]=m_data[i-1];
+        //}
+
+        std::copy(m_data+idx,m_data+m_size-2,m_data+1);
+        m_data[idx]=val;
     }
 
     void IntVector::Delete(int idx)
     {
         // TODO: 按算法思路实现Delete
+        m_size--;
+
+        std::copy(m_data+idx+1,m_data+m_size,m_data+idx);
+
+        if(m_size<=m_capacity/4)
+        {
+            m_capacity/=2;
+            int* new_data=new int [m_capacity];
+            std::copy(m_data,m_data+m_size-1,new_data);
+            delete [] m_data;
+            m_data=new_data;
+        }
     }
 
     void IntVector::Resize(int sz, int val)
@@ -65,9 +109,9 @@ namespace Sufe
     {
         if (m_data)
         {
-        delete[] m_data;
-        m_data = nullptr;
-        m_capacity = m_size = 0;
+            delete[] m_data;
+            m_data = nullptr;
+            m_capacity = m_size = 0;
         }
     }
 
@@ -75,7 +119,7 @@ namespace Sufe
     {
         for (int i = 0; i < arr.Size(); i++)
         {
-        out << arr[i] << " ";
+            out << arr[i] << " ";
         }
         return out;
     }
