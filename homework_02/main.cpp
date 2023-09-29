@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
     int num = 50000;
     if (argc > 1)
     {
-        num = atoi(argv[1]);
+        //num = atoi(argv[1]);
     }
 
     // test vector is growing while inserting

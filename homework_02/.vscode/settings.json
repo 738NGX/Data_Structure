@@ -1,5 +1,12 @@
 {
     "files.associations": {
         "initializer_list": "cpp"
-    }
+    },
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "d:\\Develop\\C_pp\\Data_Structure\\homework_02\\build",
+            "binaryPath": "d:\\Develop\\C_pp\\Data_Structure\\homework_02\\build\\runme",
+            "binaryArgs": []
+        }
+    ]
 }

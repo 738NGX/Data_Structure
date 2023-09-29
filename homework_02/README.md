@@ -25,8 +25,8 @@ IntVector::IntVector(const IntVector &other)
     {
         // TODO: 按课件实现复制构造函数
         m_size=other.Size();
-        m_capacity=other.Capacity();
-        m_data=new int [m_capacity]{0};
+        Reserve(other.Capacity());
+
         for(int i=0;i<m_size;i++)
         {
             m_data[i]=other[i];
@@ -36,8 +36,11 @@ IntVector::IntVector(const IntVector &other)
 IntVector &IntVector::operator=(const IntVector &rhs)
 {
     // TODO: 按课件实现赋值运算符重载
+    if(this==&rhs) return *this;
+
+    if(m_capacity<rhs.m_size) Reserve(rhs.m_capacity);
+
     m_size=rhs.Size();
-    m_capacity=rhs.Capacity();
     for(int i=0;i<m_size;i++)
     {
         m_data[i]=rhs[i];
