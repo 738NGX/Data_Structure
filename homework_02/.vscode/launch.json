@@ -13,25 +13,12 @@
             "request": "launch",
             "program": "${workspaceRoot}/build/runme.exe",
             "args": [],
-            "stopAtEntry": true,
+            "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [], 
-            "externalConsole": true,
+            "externalConsole": false,
             "MIMode": "gdb",
             "miDebuggerPath": "gdb.exe",
-            "preLaunchTask": "Makefile"
-        },
-        {
-            "name": "MakeBuild(mac)",
-            "type": "lldb",
-            "request": "launch",
-            "program": "${workspaceFolder}/build/runme",
-            "args": [],
-            "stopAtEntry": true,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": true,
-            "MIMode": "lldb",
             "preLaunchTask": "Makefile"
         },
         {

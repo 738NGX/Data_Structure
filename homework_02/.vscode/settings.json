@@ -7,6 +7,11 @@
             "cwd": "d:\\Develop\\C_pp\\Data_Structure\\homework_02\\build",
             "binaryPath": "d:\\Develop\\C_pp\\Data_Structure\\homework_02\\build\\runme",
             "binaryArgs": []
+        },
+        {
+            "cwd": "e:\\DEV\\Data_Structure\\Data_Structure\\homework_02\\build",
+            "binaryPath": "e:\\DEV\\Data_Structure\\Data_Structure\\homework_02\\build\\runme",
+            "binaryArgs": []
         }
     ]
 }

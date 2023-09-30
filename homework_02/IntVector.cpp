@@ -55,10 +55,10 @@ namespace Sufe
     {
         // TODO: 按算法思路实现Insert
         assert(idx<=m_size);
-        m_size++;
-
+        
         // 重新分配内存空间
         if(m_size==m_capacity) Reserve(m_capacity*2);
+        m_size++;
 
         //for(int i=m_size-1;i>idx;i--)
         //{
@@ -73,12 +73,12 @@ namespace Sufe
     {
         // TODO: 按算法思路实现Delete
         assert(idx<=m_size);
-        m_size--;
-
+        
         std::copy(m_data+idx+1,m_data+m_size,m_data+idx);
 
         // 重新分配内存空间
         if(m_size<=m_capacity/4) Reserve(m_capacity/2);
+        m_size--;
     }
 
     void IntVector::Resize(int sz, int val)
