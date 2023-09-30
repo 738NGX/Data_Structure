@@ -1,4 +1,5 @@
 #include <cassert>
+#include <algorithm>
 #include "IntVector.h"
 
 using namespace std;
@@ -60,12 +61,21 @@ namespace Sufe
         if(m_size==m_capacity) Reserve(m_capacity*2);
         m_size++;
 
+        // 传统的迭代方式,额外的时间开销
         //for(int i=m_size-1;i>idx;i--)
         //{
         //    m_data[i]=m_data[i-1];
         //}
 
-        std::copy(m_data+idx,m_data+m_size-1,m_data+1);
+        // 如果[m_data+idx,m_data+m_size-1)与复制目标范围重叠,行为未定义(cppreference.com)
+        //std::copy(m_data+idx,m_data+m_size-1,m_data+idx+1);
+        
+        // 范围的重叠在形式上是允许的，但是会导致结果的顺序不可预测(cppreference.com)
+        //std::copy_n(m_data+idx,m_size-idx-1,m_data+idx+1);
+        
+        // 移动重叠的范围时,std::move 在移动到左侧(目标范围的起始在源范围外)时适合，而std::move_backward在移动到右侧(目标范围的结尾在源范围外)时适合。
+        std::move_backward(m_data+idx,m_data+m_size-1,m_data+m_size);
+
         m_data[idx]=val;
     }
 
@@ -74,10 +84,10 @@ namespace Sufe
         // TODO: 按算法思路实现Delete
         assert(idx<=m_size);
         
-        std::copy(m_data+idx+1,m_data+m_size,m_data+idx);
+        std::move(m_data+idx+1,m_data+m_size,m_data+idx);
 
         // 重新分配内存空间
-        if(m_size<=m_capacity/4) Reserve(m_capacity/2);
+        if(m_size<=m_capacity/4&&m_capacity>16) Reserve(m_capacity/2);
         m_size--;
     }
 

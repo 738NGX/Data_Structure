@@ -42,6 +42,7 @@ void TestInsertTail(int num)
     }
 }
 
+
 int main(int argc, char *argv[])
 {
     int num = 50000;
