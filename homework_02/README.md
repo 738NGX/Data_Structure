@@ -243,9 +243,7 @@ void IntVector::Delete(int idx)
 >
 > 复制范围 `[`first`, `last`)` 中的元素到从 d_first 开始的另一范围（复制目标范围）。
 >
-> 1) 按从 first 到 last 的顺序复制 `[`first`, `last`)` 中的所有元素。
->
->  如果 d_first 在 `[`first`, `last`)` 中，那么行为未定义。此时可以用 [std::copy_backward](https://zh.cppreference.com/w/cpp/algorithm/copy_backward) 代替。
+> 1) 按从 first 到 last 的顺序复制 `[`first`, `last`)` 中的所有元素。如果 d_first 在 `[`first`, `last`)` 中，那么行为未定义。此时可以用`std::copy_backward`代替。
 >
 > 2) 复制元素，但按照 policy 执行。此重载只有在
 >
@@ -253,7 +251,7 @@ void IntVector::Delete(int idx)
 > | ------------------------------------------------------------ | ---------- |
 > | std::is_execution_policy_v \<std::remove_cvref_t<ExecutionPolicy>> | (C++20 起) |
 >
-> 是 true 时才会参与重载决议。**如果 `[`first`, `last`)` 与复制目标范围重叠，那么行为未定义。**
+> ​	是 true 时才会参与重载决议。**如果 `[`first`, `last`)` 与复制目标范围重叠，那么行为未定义。**
 >
 > 3) 仅复制谓词 pred 对其返回 true 的元素。此复制算法是稳定的：保持被复制元素的相对顺序。**如果 `[`first`, `last`)` 与复制目标范围重叠，那么行为未定义。**
 >
@@ -263,7 +261,7 @@ void IntVector::Delete(int idx)
 > | ------------------------------------------------------------ | ---------- |
 > | std::is_execution_policy_v\<std::remove_cvref_t<ExecutionPolicy>> | (C++20 起) |
 >
-> 是 true 时才会参与重载决议。
+> ​	是 true 时才会参与重载决议。
 
 这一条:
 
@@ -284,3 +282,6 @@ void IntVector::Delete(int idx)
 > 移动重叠的范围时， `std::move` 在移动到左侧（目标范围的起始在源范围外）时适合，而 `std::move_backward` 在移动到右侧（目标范围的结尾在源范围外）时适合。
 
 因此最终确定的实现方式是插入操作使用`std::move_backward`,删除操作使用`std::move`来进行实现.
+
+### 时间复杂度与性能分析
+
