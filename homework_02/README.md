@@ -285,3 +285,119 @@ void IntVector::Delete(int idx)
 
 ### 时间复杂度与性能分析
 
+从课件上给出的作业测试示例来看,其消耗的时间如下:
+
+```
+Insert 50000 elements at tail
+  Elapsed time: 0.002 seconds
+Insert 50000 elements at head
+  Elapsed time: 3.727 seconds 
+Reserve and insert 50000 elements at head
+  Elapsed time: 8.598 seconds
+```
+
+而我自己完成作业程序之后测试的消耗时间结果如下:
+
+```
+Insert 50000 elements at tail
+  Elapsed time: 0.001 seconds
+Insert 50000 elements at head
+  Elapsed time: 0.066 seconds 
+Reserve and insert 50000 elements at head
+  Elapsed time: 1.649 seconds
+```
+
+首先考虑到可能两种算法主要区别就体现在使用标准库函数还是for循环迭代来进行拷贝/移动内存的操作,但经过文档的查询发现两种方式的时间复杂度均为**O(N)**,在实际表现上可能是编译器针对库函数有专门的优化,所以表现出了性能上的差距.
+
+除此之外还注意到的一点就是计算机本身的性能也会对结果的运行速度产生影响.例如针对同一台笔记本(MagicBook14@i5-13500H),插电与不插电时在`Reserve and insert 50000 elements at head`这项测试时的性能差距达到了3秒多.所以计算机本身的性能差距对于运算结果的影响也是不可忽视的.
+
+## 🖨️Test Results
+
+```
+Making foo[] grow:
+size/capacity is 0 / 16
+size/capacity becomes 17 / 32
+size/capacity becomes 33 / 64
+size/capacity becomes 65 / 128
+size/capacity becomes 129 / 256
+size/capacity becomes 257 / 512
+size/capacity becomes 513 / 1024
+size/capacity becomes 1025 / 2048
+size/capacity becomes 2049 / 4096
+size/capacity becomes 4097 / 8192
+size/capacity becomes 8193 / 16384
+size/capacity becomes 16385 / 32768
+size/capacity becomes 32769 / 65536
+
+Insert 50000 elements at tail
+  Elapsed time: 0.001 seconds
+Insert 50000 elements at head
+  Elapsed time: 0.066 seconds 
+Reserve and insert 50000 elements at head
+  Elapsed time: 1.649 seconds
+```
+
+## 🪲Problems
+
+时间复杂度这个环节有一个地方有点意思:
+
+针对以下函数:
+
+```c++
+void IntVector::Insert(int idx, int val)
+{
+    // TODO: 按算法思路实现Insert
+    assert(idx<=m_size);
+
+    // 重新分配内存空间
+    if(m_size==m_capacity) Reserve(m_capacity*2);
+    m_size++;
+
+    std::move_backward(m_data+idx,m_data+m_size-1,m_data+m_size);
+
+    m_data[idx]=val;
+}
+```
+
+如果将`m_size++;`这一句移动到`if(m_size==m_capacity) Reserve(m_capacity*2);`之前,程序执行的效率将会获得部分显著的提升,并且依然也能完成正常的插入操作.唯一的区别在于之前几列的测试输出结果可能会略微有点区别(以下测试平台为MagicBook14@i5-13500H,不插电):
+
+**`m_size++`在`if`句后的测试结果:**
+
+```
+Making foo[] grow:
+size/capacity is 0 / 16
+size/capacity becomes 17 / 32
+......
+size/capacity becomes 32769 / 65536
+
+Insert 50000 elements at tail
+  Elapsed time: 0.001 seconds
+Insert 50000 elements at head
+  Elapsed time: 0.126 seconds 
+Reserve and insert 50000 elements at head
+  Elapsed time: 4.746 seconds 
+```
+
+**`m_size++`在`if`句前的测试结果:**
+
+```
+Making foo[] grow:
+size/capacity is 0 / 16
+size/capacity becomes 16 / 32
+......
+size/capacity becomes 32768 / 65536
+
+Insert 50000 elements at tail
+  Elapsed time: 0.004 seconds 
+Insert 50000 elements at head
+  Elapsed time: 0.204 seconds 
+Reserve and insert 50000 elements at head
+  Elapsed time: 0.154 seconds 
+```
+
+- 首先在前面几行:内存重新分配的环节向前移动了一步;
+- `Insert 50000 elements at tail`(即pushback操作)测试的效率有退步;
+- `Insert 50000 elements at head`的测试效率略有进步;
+- `Reserve and insert 50000 elements at head`的测试效率大幅提升;
+
+针对这里的性能差异,其造成的原因有待考证.
