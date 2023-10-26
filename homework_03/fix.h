@@ -1,7 +1,6 @@
 #pragma once
 #include <iostream>
 #include <map>
-#include <sstream>
 
 bool IsOperator(char c);
 

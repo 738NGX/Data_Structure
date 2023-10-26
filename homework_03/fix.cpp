@@ -3,6 +3,8 @@
 #include <iostream>
 #include <stack>
 #include <algorithm>
+#include <sstream>
+#include <cmath>
 
 using std::string;
 using std::stack;
@@ -69,6 +71,7 @@ float CalculateString(const string &infix)
         case '-': return left-right;
         case '*': return left*right;
         case '/': return left/right;
+        case '^': return pow(left,right);
         default : return 0;
     }
 }
