@@ -87,7 +87,6 @@ string ConvertToPostfix(const string &infix)
         if(!IsOperator(ch))
         {
             postfix.append(1,ch);
-            //postfix.append(" ");
             continue;
         }
         if(ch=='(')
