@@ -27,40 +27,6 @@
               }
             ],
             "preLaunchTask": "Makefile"
-        },
-        {
-            "name": "MakeBuild(mac)",
-            "type": "lldb",
-            "request": "launch",
-            "program": "${workspaceFolder}/build/runme",
-            "args": [],
-            "stopAtEntry": true,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": true,
-            "MIMode": "lldb",
-            "preLaunchTask": "Makefile"
-        },
-        {
-            "name": "MakeBuild(linux)",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${workspaceFolder}/build/runme",
-            "args": [],
-            "stopAtEntry": true,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": true,
-            "MIMode": "gdb",
-            "miDebuggerPath": "gdb",
-            "setupCommands": [
-              {   // Display content in STL containers pretty
-                  "description": "Enable pretty-printing for gdb",
-                  "text": "-enable-pretty-printing",
-                  "ignoreFailures": true
-              }
-            ],
-            "preLaunchTask": "Makefile"
         }
     ]
 }
