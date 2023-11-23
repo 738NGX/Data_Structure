@@ -1,0 +1,66 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    // Available variables which can be used inside of strings.
+    // ${workspaceRoot}: the root folder of the team
+    // ${cwd}: the current working directory of the spawned process
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "MakeBuild(win)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/build/runme.exe",
+            "args": [],
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "environment": [], 
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "miDebuggerPath": "gdb.exe",
+            "setupCommands": [
+              {   // Display content in STL containers pretty
+                  "description": "Enable pretty-printing for gdb",
+                  "text": "-enable-pretty-printing",
+                  "ignoreFailures": true
+              }
+            ],
+            "preLaunchTask": "Makefile"
+        },
+        {
+            "name": "MakeBuild(mac)",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/runme",
+            "args": [],
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "lldb",
+            "preLaunchTask": "Makefile"
+        },
+        {
+            "name": "MakeBuild(linux)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/runme",
+            "args": [],
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "miDebuggerPath": "gdb",
+            "setupCommands": [
+              {   // Display content in STL containers pretty
+                  "description": "Enable pretty-printing for gdb",
+                  "text": "-enable-pretty-printing",
+                  "ignoreFailures": true
+              }
+            ],
+            "preLaunchTask": "Makefile"
+        }
+    ]
+}
