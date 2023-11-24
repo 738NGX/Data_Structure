@@ -12,6 +12,9 @@ namespace Sufe
         Node *left;
         Node *right;
         Node(int val) : key(val), symbol(0), left(nullptr), right(nullptr) {}
+        Node(int val,char ch): key(val),symbol(ch),left(nullptr),right(nullptr) {}
+        Node(int val,Node* l,Node* r): key(val),symbol(0),left(l),right(r) {}
+        Node(int val,char ch,Node* l,Node* r): key(val),symbol(ch),left(l),right(r) {}
     };
 
     class BinaryTree

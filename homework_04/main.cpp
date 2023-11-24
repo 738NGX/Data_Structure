@@ -17,10 +17,10 @@ int main()
                      63, 90, 28, 10, 23, 2,
                      20, 1, 99};
 
-    Sufe::BinaryTree huffman(symbols, freq);
-    string message = huffman.Encode("the quick brown fox jumps over a lazy dog");
-    cout << "Huffman message has length of " << message.size() << endl;
-    cout << "The original text is: " << huffman.Decode(message) << endl;
+    Sufe::BinaryTree huffman(symbols,freq);
+    string message=huffman.Encode("the quick brown fox jumps over a lazy dog");
+    cout<<"Huffman message has length of "<<message.size()<<endl;
+    cout<<"The original text is: "<<huffman.Decode(message)<<endl;
 
     return 0;
 }
