@@ -89,18 +89,13 @@ namespace Sufe
         Node* ptr=m_root;
         for(char ch:binary)
         {
+            if(ch=='0') ptr=ptr->left;
+            else if(ch=='1') ptr=ptr->right;
             if(ptr->symbol!=0)
             {
                 strtxt.push_back(ptr->symbol);
                 ptr=m_root;
             }
-            if(ch=='0') ptr=ptr->left;
-            else if(ch=='1') ptr=ptr->right;
-        }
-        if(ptr->symbol!=0)
-        {
-            strtxt.push_back(ptr->symbol);
-            ptr=m_root;
         }
         return strtxt;
     }
